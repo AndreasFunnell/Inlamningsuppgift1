@@ -8,12 +8,14 @@ public class ContactManager : IContactRepository
 {
     private List<Contact> contacts;
 
+    // Konstruktor för ContactManager, initierar listan med kontakter och laddar befintliga kontakter från filen.
     public ContactManager()
     {
         contacts = new List<Contact>();
         LoadContacts();
     }
 
+    // Huvudmetod för att köra kontaktprogrammet.
     public void Run()
     {
         while (true)
@@ -52,8 +54,10 @@ public class ContactManager : IContactRepository
         }
     }
 
+    // Metod för att lägga till en ny kontakt.
     public void AddContact()
     {
+        // Användarinteraktion för att ange kontaktinformation.
         Console.WriteLine("Ange förnamn:");
         string firstName = Console.ReadLine() ?? "";
 
@@ -69,6 +73,7 @@ public class ContactManager : IContactRepository
         Console.WriteLine("Ange adressinformation:");
         string address = Console.ReadLine() ?? "";
 
+        // Skapa en ny kontakt med angiven information och lägg till i listan.
         Contact newContact = new Contact
         {
             FirstName = firstName,
@@ -83,6 +88,7 @@ public class ContactManager : IContactRepository
         Console.WriteLine("Kontakt tillagd!\n");
     }
 
+    // Metod för att lista alla kontakter.
     public void ListContacts()
     {
         Console.WriteLine("Lista över kontakter:\n");
@@ -95,15 +101,18 @@ public class ContactManager : IContactRepository
         Console.WriteLine();
     }
 
+    // Metod för att visa detaljerad information om en specifik kontakt.
     public void ShowContactDetails()
     {
         Console.WriteLine("Ange e-postadress för kontakten du vill visa detaljer för:");
         string email = Console.ReadLine() ?? "";
 
+        // Hämta kontakten med angiven e-postadress.
         Contact selectedContact = GetContactByEmail(email);
 
         if (selectedContact != null)
         {
+            // Visa detaljer om kontakten.
             Console.WriteLine($"Detaljer för kontakt {selectedContact.FirstName} {selectedContact.LastName}:\n");
             Console.WriteLine($"Förnamn: {selectedContact.FirstName}");
             Console.WriteLine($"Efternamn: {selectedContact.LastName}");
@@ -117,15 +126,18 @@ public class ContactManager : IContactRepository
         }
     }
 
+    // Metod för att ta bort en kontakt baserat på e-postadress.
     public void RemoveContact()
     {
         Console.WriteLine("Ange e-postadress för kontakten du vill ta bort:");
         string email = Console.ReadLine() ?? "";
 
+        // Hämta kontakten med angiven e-postadress.
         Contact contactToRemove = GetContactByEmail(email);
 
         if (contactToRemove != null)
         {
+            // Ta bort kontakten från listan.
             contacts.Remove(contactToRemove);
             Console.WriteLine($"Kontakt {contactToRemove.FirstName} {contactToRemove.LastName} har tagits bort.\n");
         }
@@ -135,6 +147,7 @@ public class ContactManager : IContactRepository
         }
     }
 
+    // Metod för att ladda kontakter från filen.
     public void LoadContacts()
     {
         if (File.Exists("contacts.json"))
@@ -148,6 +161,7 @@ public class ContactManager : IContactRepository
         }
     }
 
+    // Metod för att spara kontakter till filen.
     public void SaveContacts()
     {
         string json = JsonConvert.SerializeObject(contacts, Formatting.Indented);
@@ -179,6 +193,7 @@ public class ContactManager : IContactRepository
         }
     }
 }
+
 
 
 
