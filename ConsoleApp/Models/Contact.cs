@@ -1,5 +1,7 @@
-﻿public class Contact
+﻿// Contact.cs
+public class Contact
 {
+    // Egenskaper för kontaktinformation.
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string PhoneNumber { get; set; }
@@ -9,6 +11,7 @@
     // Konstruktor för att säkerställa att icke-nullable egenskaper har ett värde.
     public Contact()
     {
+        // Initialisera egenskaperna med tomma strängar.
         FirstName = "";
         LastName = "";
         PhoneNumber = "";
@@ -16,4 +19,5 @@
         Address = "";
     }
 }
+
 
